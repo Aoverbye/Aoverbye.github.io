@@ -1,5 +1,7 @@
 ---
 title: "Aoverbye.github.io"
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r}

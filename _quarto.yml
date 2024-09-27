@@ -3,18 +3,23 @@ project:
   output-dir: docs
 
 website:
-  title: "Aoverbye.github.io"
+  title: "Amanda Overbye"
   navbar:
     left:
       - href: index.qmd
         text: Home
       - about.qmd
+      - href: resources.qmd
+        text: Resources
 
 format:
   html:
-    theme: cosmo
+    theme: 
+      light: superhero
+      dark: superhero
     css: styles.css
-    toc: true
+    toc: false
+    page-layout: full
 
 editor: visual
 

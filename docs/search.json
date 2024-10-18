@@ -26,5 +26,40 @@
     "title": "Amanda Overbye",
     "section": "Professional Experience",
     "text": "Professional Experience"
+  },
+  {
+    "objectID": "blog_posts.html",
+    "href": "blog_posts.html",
+    "title": "Blog",
+    "section": "",
+    "text": "blog post title\n\n\n\nQuarto\n\n\nMEDS\n\n\ntest-post\n\n\n\nA short catchy description of a blog post\n\n\n\nAmanda Overbye\n\n\nOct 18, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "blog_posts/2024-10-2024-my-first-post/index.html",
+    "href": "blog_posts/2024-10-2024-my-first-post/index.html",
+    "title": "blog post title",
+    "section": "",
+    "text": "I am going to insert a footnote here1\nHeres my next paragraph2"
+  },
+  {
+    "objectID": "blog_posts/2024-10-2024-my-first-post/index.html#this-is-my-first-section",
+    "href": "blog_posts/2024-10-2024-my-first-post/index.html#this-is-my-first-section",
+    "title": "blog post title",
+    "section": "",
+    "text": "I am going to insert a footnote here1\nHeres my next paragraph2"
+  },
+  {
+    "objectID": "blog_posts/2024-10-2024-my-first-post/index.html#this-is-my-second",
+    "href": "blog_posts/2024-10-2024-my-first-post/index.html#this-is-my-second",
+    "title": "blog post title",
+    "section": "This is my second",
+    "text": "This is my second\nim citing [1]\nblah blah blah trying to cite a journal"
+  },
+  {
+    "objectID": "blog_posts/2024-10-2024-my-first-post/index.html#footnotes",
+    "href": "blog_posts/2024-10-2024-my-first-post/index.html#footnotes",
+    "title": "blog post title",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nPronghorn footnote↩︎\nhere is my second footnote↩︎"
   }
 ]

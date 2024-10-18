@@ -1,0 +1,36 @@
+---
+title: "blog post title"
+description: "A short catchy description of a blog post"
+author:
+  - name: Amanda Overbye
+    url: https:/aoverbye.github.io
+    orcir: 000-002-5300-3075
+    affiliation: MEDS
+    affiliation-url: https://bren.ucsb.edu/masters-programs/master-environmental-data-science
+date: 2024-10-18
+categories: [Quarto, MEDS, test-post]
+toc: true
+bibliography: references.bib
+csl: plos-computational-biology.csl
+image: pronghorn1.jpg
+citation:
+    url: https://en.wikipedia.org/wiki/Pronghorn
+draft: false
+draft-mode: visible 
+---
+
+## This is my first section
+
+I am going to insert a footnote here[^1]
+
+[^1]: Pronghorn footnote
+
+Heres my next paragraph[^2]
+
+[^2]: here is my second footnote
+
+## This is my second
+
+im citing [@csik2024]
+
+blah blah blah trying to cite a journal

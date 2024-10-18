@@ -15,7 +15,7 @@ website:
 format:
   html:
     theme: 
-      light: superhero
+      light: united
       dark: superhero
     css: styles.css
     toc: false

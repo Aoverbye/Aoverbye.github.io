@@ -1,0 +1,45 @@
+---
+title: "game_page"
+author: "Amanda Overbye"
+---
+
+```{r}
+library(shiny)
+
+# UI
+ui <- fluidPage(
+  titlePanel("Guess the Number Game"),
+  sidebarLayout(
+    sidebarPanel(
+      numericInput("guess", "Enter a guess:", min = 1, max = 100, value = 50),
+      actionButton("submit", "Submit Guess"),
+      textOutput("result")
+    ),
+    mainPanel(
+      textOutput("instructions")
+    )
+  )
+)
+
+# Server logic
+server <- function(input, output, session) {
+  target_number <- sample(1:100, 1)
+  
+  output$instructions <- renderText({
+    "Try to guess the target number between 1 and 100."
+  })
+  
+  observeEvent(input$submit, {
+    guess <- input$guess
+    if(guess == target_number) {
+      output$result <- renderText("Congrats! You guessed the number.")
+    } else {
+      output$result <- renderText(paste("Wrong! The target number was", target_number))
+    }
+  })
+}
+
+# Run the application
+shinyApp(ui = ui, server = server)
+```
+

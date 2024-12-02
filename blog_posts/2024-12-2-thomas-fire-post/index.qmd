@@ -1,0 +1,4 @@
+---
+title: "thomas_fire_analysis"
+author: "Amanda G. Overbye"
+---

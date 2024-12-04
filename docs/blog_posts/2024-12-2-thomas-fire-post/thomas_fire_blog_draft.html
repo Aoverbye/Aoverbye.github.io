@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>thomas_fire_blog – Amanda Overbye</title>
+<title>The Great Thomas Fire Analysis: A Tour Of Functions – Amanda Overbye</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -149,7 +149,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page">
+      <h1 class="title">The Great Thomas Fire Analysis: A Tour Of Functions</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page">
+
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
@@ -159,51 +175,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p>title: “Thomas Fire Blog” description: “A short catchy description of a blog post” author: - name: Amanda Overbye url: https:/aoverbye.github.io orcir: 000-002-5300-3075 affiliation: MEDS affiliation-url: https://bren.ucsb.edu/masters-programs/master-environmental-data-science date: 2024-10-18 categories: [Quarto, MEDS, test-post] toc: true draft: false draft-mode: visible</p>
-<section id="the-great-thomas-fire-analysis" class="level1">
-<h1>The Great Thomas Fire Analysis</h1>
-<section id="amanda-g.-overbye" class="level3">
-<h3 class="anchored" data-anchor-id="amanda-g.-overbye">Amanda G. Overbye</h3>
+
+<p>title: “Thomas Fire Blog” description: “Analyzing the Impact Of the Thomas Fire Using a Handful Of Functions” author: - name: Amanda G. Overbye url: https:/aoverbye.github.io orcir: 000-002-5300-3075 affiliation: MEDS affiliation-url: https://bren.ucsb.edu/masters-programs/master-environmental-data-science date: 2024-12-03 categories: [Python, MEDS, Geospatial, Wildfire] toc: true draft: false draft-mode: visible</p>
+<section id="amanda-g.-overbye-remember-to-do-the-read-me" class="level3">
+<h3 class="anchored" data-anchor-id="amanda-g.-overbye-remember-to-do-the-read-me">Amanda G. Overbye REMEMBER TO DO THE READ ME</h3>
 <p>github: https://github.com/Aoverbye/thomas_fire_analysis</p>
-</section>
-<section id="background-on-the-thomas-fire" class="level2">
-<h2 class="anchored" data-anchor-id="background-on-the-thomas-fire">Background on the Thomas Fire</h2>
-<p>the fire lasted from Dec 4, 2017 – Fri, Jan 12, 2018</p>
-</section>
-<section id="analyzing-the-impact-of-the-thomas-fire-using-a-handful-of-functions" class="level2">
-<h2 class="anchored" data-anchor-id="analyzing-the-impact-of-the-thomas-fire-using-a-handful-of-functions">Analyzing the Impact Of the Thomas Fire Using a Handful Of Functions</h2>
-</section>
-<section id="a-tour-of-python-functions" class="level2">
-<h2 class="anchored" data-anchor-id="a-tour-of-python-functions">A tour of python functions</h2>
-<section id="the-goal-of-this-blog-post-is-to-do-a-brief-tour-of-some-useful-functions-that-can-be-used-in-python-when-analyzing-the-impacts-of-wildfires" class="level3">
-<h3 class="anchored" data-anchor-id="the-goal-of-this-blog-post-is-to-do-a-brief-tour-of-some-useful-functions-that-can-be-used-in-python-when-analyzing-the-impacts-of-wildfires">The goal of this blog post is to do a brief tour of some useful functions that can be used in Python when analyzing the impacts of wildfires</h3>
-<p>Functions we will focus on - <code>Concat()</code> - <code>Rolling()</code> - <code>To_file()</code> - <code>Squeeze()</code> - <code>imshow()</code></p>
-</section>
-<section id="what-skills-am-i-trying-to-show" class="level3">
-<h3 class="anchored" data-anchor-id="what-skills-am-i-trying-to-show">What skills am I trying to show</h3>
-<p>These skills include:</p>
+<p>Have you ever dreamed of analyzing a wildfire all by yourself using Python and a handful of functions? Well if you have, today is your lucky day! The goal of this blog post is to give a quick guide on how to do just that so you can make your dream come true or live vicariously through me. First lets go over some background on the Thomas Fire that impacted Santa Barbara and the surrounding areas.</p>
+<p>I am going to be doing this in two parts. In the first part I am going to be making a graph to visualize how the fire impacted air quality or the AQI. For the second part, I am going to be using false color imagery to get a bettet picture, or just a picture atleast, of the impact the fire had on vegetation in the area. Like I mentioned earilier, this post is going to highlight the functions I am going to use,</p>
+<p>And the functions are…</p>
 <ul>
-<li>data cleaning</li>
-<li>combining multiple data frames</li>
-<li>visualizing time series</li>
-<li>Filtering geo data and saving it as a file</li>
-<li>Utilizing the <code>squeeze()</code> and <code>drop_vars</code> functions to create usable data</li>
-<li>Creating and plotting a “true” color RGB image</li>
-<li>Working with the <code>robust</code> parameter</li>
-<li>Creating an image highlighting shortwave infrared, near-infrared, and red false colors to better view the impacts of the 2017 Thomas Fire</li>
+<li><code>Concat()</code></li>
+<li><code>Rolling()</code></li>
+<li><code>To_file()</code></li>
+<li><code>Squeeze()</code></li>
+<li><code>imshow()</code></li>
 </ul>
-<p>While this blog post will mention some analyzing of graphs, the point is more to show the use of the above listed functions when doing analysis. ### Information about where we are getting data</p>
+<p>Throughout this analysis, I am going to highlight the places where I used the functions, mention the library they are from, and explain, roughly, what they do. In addition to the functions I will be highlighting overall skills I will use in each section.</p>
+<section id="some-background-on-the-thomas-fire" class="level4">
+<h4 class="anchored" data-anchor-id="some-background-on-the-thomas-fire">Some Background on the Thomas Fire</h4>
+<p>The Thomas Fire was an extremely large wildfire that burned 378,000 acres from December 4th 2017 to January 12th 2018. At the time, it was considered the largest wildlife in modern California history. The fire caused massive destruction both from the flames and the subsequent mudslides. It was truly devestating. Hopefully in learning to do these analysis we can help in finding new ways to midigate and respond to these disasters.</p>
 </section>
+<section id="some-background-on-the-data" class="level4">
+<h4 class="anchored" data-anchor-id="some-background-on-the-data">Some Background on the Data</h4>
+<p>I am going to be using three data sets. Each data set should be openly available to use. I will talk more about the data in the sections where I use it.</p>
+<p>https://www.cnn.com/2018/06/02/us/thomas-fire-officially-out/index.html</p>
 </section>
 </section>
 <section id="part-1.-visualizing-aqi" class="level1">
 <h1>Part 1. Visualizing AQI</h1>
-<p>Air Quality is often significantly impacted by fires. <strong>Say something here about the thomas fire and air quality</strong> What is aqi? “The Air Quality Index (AQI) values are presented in several files. AQI is calculated each day for each monitor for the Criteria Gases and PM10 and PM2.5 (FRM and non FRM).”</p>
-<p>The skills needed/developed for this part of the project include combining multiple data frames visualizing time series</p>
-<p>We will also touch on some data cleaning while we are at it.</p>
-<section id="data" class="level3">
-<h3 class="anchored" data-anchor-id="data">Data</h3>
-<p>The data we are going to be using is about Air Quality Index (AQI) from the <a href="https://aqs.epa.gov/aqsweb/airdata/download_files.html#AQI">US Environmental Protection Agency</a>. The particular data sets we are using are from 2017 and 2018 and go by county.</p>
+<p>The data we are going to be using is about Air Quality Index (AQI) from the <a href="https://aqs.epa.gov/aqsweb/airdata/download_files.html#AQI">US Environmental Protection Agency</a>. The particular data sets we are using are from 2017 and 2018 and go by county. This dataset has measurements of criteria gases (things like ground-level ozone, carbon monoxide, sulfur dioxide, lead, etc.), and Particulate Matter (PM10 and PM2.5). Particulate matter is just a bunch of super tiny bits of debris that float in the air and can get in our lungs. It is measured by its diameter in microns, which are one-millionth of a meter. PM10 is larger and can sometimes be visable, whereas PM2.5 is super, super tiny and can get in our bloodstream through our lung tissue. Unsurprisingly, it is bad for us. Particulate matter is often generated by fires through all the burning, and thats why I would like to measure it here.</p>
+<p>My goal for this section is to create a simple graph that will show the measurement of AQI over time. There are going be a couple steps in this process</p>
+<ol type="1">
+<li>Cleaning the data</li>
+<li>Changing the index</li>
+<li>Averaging data</li>
+<li>Visualizing data</li>
+</ol>
+<p>So lets begin!</p>
 <div id="5653e2bd-027a-4ca1-86de-64b74166342b" class="cell" data-tags="[]" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import Libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -241,7 +249,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the file for the Thomas Fire dataset using GeoPandas</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>ca_fires <span class="op">=</span> gpd.read_file(fp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
 <section id="a-sweeping-explanation-of-data-cleaning" class="level2">
 <h2 class="anchored" data-anchor-id="a-sweeping-explanation-of-data-cleaning">A Sweeping Explanation of Data Cleaning</h2>
 <p>When starting a project, I am often struck by how much I do not like the format the data is in. This is something every young data scientist and coder must experience and develope on their own. We all must find a format that calls to us and spend the rest of our coding lives cleaning every data set we get until it is in that format. My own person favorite is lower snake case. It makes sense to me because we say lines of texts are like strings, and snakes are the most string like animal in my opinion.</p>
@@ -301,7 +308,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="thomas_fire_blog_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="thomas_fire_blog_draft_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -315,13 +322,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The skills for this section include:</p>
 <ul>
 <li>Filtering geo data and saving it as a file</li>
-<li>Utilizing the <code>squeeze()</code> and <code>drop_vars</code> functions to create usable data</li>
+<li>Dropping bands on geospatial data</li>
 <li>Creating and plotting a “true” color RGB image</li>
-<li>Working with the <code>robust</code> parameter</li>
-<li>Creating an image highlighting shortwave infrared, near-infrared, and red false colors to better view the impacts of the 2017 Thomas Fire</li>
+<li>Creating an false color image</li>
 </ul>
-<section id="data-1" class="level3">
-<h3 class="anchored" data-anchor-id="data-1">Data</h3>
+<section id="data" class="level3">
+<h3 class="anchored" data-anchor-id="data">Data</h3>
 <p>For this part of my project I will be using data from <a href="https://planetarycomputer.microsoft.com/dataset/landsat-c2-l2">Microsofts Landsat Collection 2 Level-2 satellite imagery</a> and data from the <a href="https://catalog.data.gov/dataset/california-fire-perimeters-all-b3436">California Fire Perimeters (all) dataset</a></p>
 </section>
 <section id="filtering-the-data-for-the-2017-thomas-fire-and-creating-a-geojson-file" class="level3">
@@ -343,7 +349,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="thomas_fire_blog_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="thomas_fire_blog_draft_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -395,7 +401,7 @@ Data variables:
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="thomas_fire_blog_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="thomas_fire_blog_draft_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -412,7 +418,7 @@ Data variables:
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="thomas_fire_blog_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="thomas_fire_blog_draft_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -436,7 +442,7 @@ Thomas Fire CRS: EPSG:3857</code></pre>
 </div>
 </div>
 <section id="the-final-map" class="level3">
-<h3 class="anchored" data-anchor-id="the-final-map">The final map:</h3>
+<h3 class="anchored" data-anchor-id="the-final-map">The Final Map:</h3>
 <div id="69621e3a-8eef-4c4a-9ea2-c146911cb68e" class="cell" data-tags="[]" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot False Color Image</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">10</span>))</span>
@@ -469,15 +475,17 @@ Thomas Fire CRS: EPSG:3857</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="thomas_fire_blog_files/figure-html/cell-13-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="thomas_fire_blog_draft_files/figure-html/cell-13-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>And there you have it. Here is the map with the fire perimeter overlayed. One of the reasons false color imagery can be useful is that it can highlight where vegetation was most effect. We can see that not all the vegetation in the fire perimeter was impacted the same amount. This can shed light on why fires burn the way they do, which in turn can help us with fire management.</p>
 <p>I hope you enjoyed this wordy blog post, and now have a couple more functions under your belt you can use next time you want to do analysis on a wildfire!</p>
-<p>Citations</p>
-<p>Riebeek, R. (2014, March 4). Why is that Forest Red and that cloud blue?. NASA. https://earthobservatory.nasa.gov/features/FalseColor</p>
+<p>References</p>
+<p>Andone, D. (2018, June 2). <em>The largest wildfire in California’s modern history is finally out, more than 6 months after it started</em>. CNN. Retrieved December 2, 2024, from https://www.cnn.com/2018/06/02/us/thomas-fire-officially-out/index.html</p>
+<p>Riebeek, R. (2014, March 4). <em>Why is that Forest Red and that cloud blue?</em> NASA. https://earthobservatory.nasa.gov/features/FalseColor</p>
+<p>U.S. Environmental Protection Agency. (2024, June 20). <em>Particulate matter (PM) basics.</em> EPA. Retrieved December 2, 2024, from https://www.epa.gov/pm-pollution/particulate-matter-pm-basics</p>
 
 
 </section>

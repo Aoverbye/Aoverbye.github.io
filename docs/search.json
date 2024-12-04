@@ -7,67 +7,46 @@
     "text": "library(shiny)\n\n# UI\nui &lt;- fluidPage(\n  titlePanel(\"Guess the Number Game\"),\n  sidebarLayout(\n    sidebarPanel(\n      numericInput(\"guess\", \"Enter a guess:\", min = 1, max = 100, value = 50),\n      actionButton(\"submit\", \"Submit Guess\"),\n      textOutput(\"result\")\n    ),\n    mainPanel(\n      textOutput(\"instructions\")\n    )\n  )\n)\n\n# Server logic\nserver &lt;- function(input, output, session) {\n  target_number &lt;- sample(1:100, 1)\n  \n  output$instructions &lt;- renderText({\n    \"Try to guess the target number between 1 and 100.\"\n  })\n  \n  observeEvent(input$submit, {\n    guess &lt;- input$guess\n    if(guess == target_number) {\n      output$result &lt;- renderText(\"Congrats! You guessed the number.\")\n    } else {\n      output$result &lt;- renderText(paste(\"Wrong! The target number was\", target_number))\n    }\n  })\n}\n\n# Run the application\nshinyApp(ui = ui, server = server)\n\nShiny applications not supported in static R Markdown documents"
   },
   {
-    "objectID": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog.html",
-    "href": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog.html",
-    "title": "The Great Thomas Fire Analysis",
+    "objectID": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog_draft.html",
+    "href": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog_draft.html",
+    "title": "The Great Thomas Fire Analysis: A Tour Of Functions",
     "section": "",
-    "text": "title: “Thomas Fire Blog” description: “A short catchy description of a blog post” author: - name: Amanda Overbye url: https:/aoverbye.github.io orcir: 000-002-5300-3075 affiliation: MEDS affiliation-url: https://bren.ucsb.edu/masters-programs/master-environmental-data-science date: 2024-10-18 categories: [Quarto, MEDS, test-post] toc: true draft: false draft-mode: visible"
+    "text": "title: “Thomas Fire Blog” description: “Analyzing the Impact Of the Thomas Fire Using a Handful Of Functions” author: - name: Amanda G. Overbye url: https:/aoverbye.github.io orcir: 000-002-5300-3075 affiliation: MEDS affiliation-url: https://bren.ucsb.edu/masters-programs/master-environmental-data-science date: 2024-12-03 categories: [Python, MEDS, Geospatial, Wildfire] toc: true draft: false draft-mode: visible"
   },
   {
-    "objectID": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog.html#background-on-the-thomas-fire",
-    "href": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog.html#background-on-the-thomas-fire",
-    "title": "The Great Thomas Fire Analysis",
-    "section": "Background on the Thomas Fire",
-    "text": "Background on the Thomas Fire\nthe fire lasted from Dec 4, 2017 – Fri, Jan 12, 2018"
-  },
-  {
-    "objectID": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog.html#analyzing-the-impact-of-the-thomas-fire-using-a-handful-of-functions",
-    "href": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog.html#analyzing-the-impact-of-the-thomas-fire-using-a-handful-of-functions",
-    "title": "The Great Thomas Fire Analysis",
-    "section": "Analyzing the Impact Of the Thomas Fire Using a Handful Of Functions",
-    "text": "Analyzing the Impact Of the Thomas Fire Using a Handful Of Functions"
-  },
-  {
-    "objectID": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog.html#a-tour-of-python-functions",
-    "href": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog.html#a-tour-of-python-functions",
-    "title": "The Great Thomas Fire Analysis",
-    "section": "A tour of python functions",
-    "text": "A tour of python functions\n\nThe goal of this blog post is to do a brief tour of some useful functions that can be used in Python when analyzing the impacts of wildfires\nFunctions we will focus on - Concat() - Rolling() - To_file() - Squeeze() - imshow()\n\n\nWhat skills am I trying to show\nThese skills include:\n\ndata cleaning\ncombining multiple data frames\nvisualizing time series\nFiltering geo data and saving it as a file\nUtilizing the squeeze() and drop_vars functions to create usable data\nCreating and plotting a “true” color RGB image\nWorking with the robust parameter\nCreating an image highlighting shortwave infrared, near-infrared, and red false colors to better view the impacts of the 2017 Thomas Fire\n\nWhile this blog post will mention some analyzing of graphs, the point is more to show the use of the above listed functions when doing analysis. ### Information about where we are getting data"
-  },
-  {
-    "objectID": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog.html#a-sweeping-explanation-of-data-cleaning",
-    "href": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog.html#a-sweeping-explanation-of-data-cleaning",
-    "title": "The Great Thomas Fire Analysis",
+    "objectID": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog_draft.html#a-sweeping-explanation-of-data-cleaning",
+    "href": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog_draft.html#a-sweeping-explanation-of-data-cleaning",
+    "title": "The Great Thomas Fire Analysis: A Tour Of Functions",
     "section": "A Sweeping Explanation of Data Cleaning",
     "text": "A Sweeping Explanation of Data Cleaning\nWhen starting a project, I am often struck by how much I do not like the format the data is in. This is something every young data scientist and coder must experience and develope on their own. We all must find a format that calls to us and spend the rest of our coding lives cleaning every data set we get until it is in that format. My own person favorite is lower snake case. It makes sense to me because we say lines of texts are like strings, and snakes are the most string like animal in my opinion.\n\n# Combine the two data sets using pd.concat\naqi = pd.concat([aqi_17, aqi_18], ignore_index=True)\n\n# Format column names into lower snake case\naqi.columns = (aqi.columns\n                  .str.lower()\n                  .str.replace(' ','_')\n                )\n\n# Select the data from Santa Barbara County\naqi_sb = aqi[(aqi['county_name'] == 'Santa Barbara')]\n\n# Select columns of interest\naqi_sb = aqi_sb[['date', 'aqi', 'category', 'defining_parameter', 'defining_site', 'number_of_sites_reporting']]"
   },
   {
-    "objectID": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog.html#setting-the-index-as-date",
-    "href": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog.html#setting-the-index-as-date",
-    "title": "The Great Thomas Fire Analysis",
+    "objectID": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog_draft.html#setting-the-index-as-date",
+    "href": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog_draft.html#setting-the-index-as-date",
+    "title": "The Great Thomas Fire Analysis: A Tour Of Functions",
     "section": "Setting the index as date",
     "text": "Setting the index as date\nThe data is being analyzed over time, and setting the date as the index allows for more convenient handling of time-based operations. By changing the index I am making sure that me and computer are on the same page besides the webpage.\n\n# Update the `date` column to be datetime object\naqi_sb.date = pd.to_datetime(aqi_sb['date'])\n\n# Update the index to be the `date` column\naqi_sb = aqi_sb.set_index('date')"
   },
   {
-    "objectID": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog.html#averaging-the-aqi-over-time",
-    "href": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog.html#averaging-the-aqi-over-time",
-    "title": "The Great Thomas Fire Analysis",
+    "objectID": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog_draft.html#averaging-the-aqi-over-time",
+    "href": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog_draft.html#averaging-the-aqi-over-time",
+    "title": "The Great Thomas Fire Analysis: A Tour Of Functions",
     "section": "Averaging The AQI Over Time",
     "text": "Averaging The AQI Over Time\nIn order to be able to see the impact of the fire on air quality, we need to know what the air quality was before.\n\nThe rolling() function\nHere we are using a function called rolling(). What this function does is it shows how something(averages?) change over time. They call them rolling window calculations because it calculates over a “window” of time, and sense time is moving the function must be moving too so we say its “rolling.” In the code, you may notice we put ‘5D’ in the parathesis, this is specifying what I want the window of time to be. Here I do 5D because I want it to be five days.\n\n\nPlot\nThe end result of this analysis is a plot. In regards to AQI, the higher the value, the worse the air quality. There is a spike where December is, which is what I expected because that is when the fire was.\n“For example, an AQI value of 50 or below represents good air quality, while an AQI value over 300 represents hazardous air quality.”\n\n# Calculate AQI rolling average over 5 days\nrolling_average = aqi_sb['aqi'].rolling('5D').mean()\n\n# Add mean of AQI over the 5-day rolling window as a new column\naqi_sb['five_day_average'] = rolling_average\n\n# Create a plot of the 5-day rolling average AQI and the daily average AQI\naqi_sb[['aqi', 'five_day_average']].plot(kind='line',\n                                         legend = ['Daily AQI', 'Five Day Average AQI'],\n                                         title=' Daily and 5-day Average AQI In Santa Barbara County', \n                                         ylabel='AQI', \n                                         xlabel='Date',\n                                        )"
   },
   {
-    "objectID": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog.html#dropping-bands",
-    "href": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog.html#dropping-bands",
-    "title": "The Great Thomas Fire Analysis",
+    "objectID": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog_draft.html#dropping-bands",
+    "href": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog_draft.html#dropping-bands",
+    "title": "The Great Thomas Fire Analysis: A Tour Of Functions",
     "section": "Dropping bands",
     "text": "Dropping bands\nI am now going to be working with my landsat data. I can see when I print the data set that it has an extra band that will not be neccessary in our analysis.\n\nThe Squeeze() Function\nThe squeeze() function is from the Numpy library and allows us to get rid of any dimensions with the size of 1. This keeps the data from taking up to much space, it will also help me remove the band so I can replace it with my own band.\n\n# Print to get a general overview of the landsat data\nprint(landsat)\n\n# Remove extra dimensions\nlandsat = landsat.squeeze()\n\n# Drop 'band'\nlandsat = landsat.drop_vars('band')\n\n&lt;xarray.Dataset&gt; Size: 25MB\nDimensions:      (band: 1, x: 870, y: 731)\nCoordinates:\n  * band         (band) int64 8B 1\n  * x            (x) float64 7kB 1.213e+05 1.216e+05 ... 3.557e+05 3.559e+05\n  * y            (y) float64 6kB 3.952e+06 3.952e+06 ... 3.756e+06 3.755e+06\n    spatial_ref  int64 8B 0\nData variables:\n    red          (band, y, x) float64 5MB ...\n    green        (band, y, x) float64 5MB ...\n    blue         (band, y, x) float64 5MB ...\n    nir08        (band, y, x) float64 5MB ...\n    swir22       (band, y, x) float64 5MB ...\n\n\n\n\nPlotting the True Color Image\nThis is where I have replaced the band I dropped earlier with red, green blue\n\n\nThe imshow(robust = True) Function\nThe imshow() function comes from the xarray library and works with a function of the same name from the matplotlib.pyplot. This is af unction that shows a 2-D pictures. Incorporating the the xarray library makes it extra useful here because I can use the (robust = True) arguement to ignore any outlier colors, which creates a more realistic looking picture.\n\n# Select 'red' 'green' and 'blue' bands\n# Convert to a NumPy array using .to_array()\nlandsat[['red', 'green', 'blue']].to_array().plot.imshow(robust=True)\n\n\n\n\n\n\n\n\n\n\nPlotting The False Color Image\nI used SWIR, NIR, Green because it can be especially helpful when looking at fires at it shows healthy vegetation as bright green.\nEven without the fire perimeter overlayed, it is easy to tell where the fire was based on this false color image. The areas in red are the areas that were burning fix this\nSource https://earthobservatory.nasa.gov/features/FalseColor\n\n# Select SWIR, NIR, and Red bands and plot false color image\nlandsat[['swir22', 'nir08', 'red']].to_array().plot.imshow(robust=True)"
   },
   {
-    "objectID": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog.html#mapping-the-perimeter-and-falso-color-image",
-    "href": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog.html#mapping-the-perimeter-and-falso-color-image",
-    "title": "The Great Thomas Fire Analysis",
+    "objectID": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog_draft.html#mapping-the-perimeter-and-falso-color-image",
+    "href": "blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog_draft.html#mapping-the-perimeter-and-falso-color-image",
+    "title": "The Great Thomas Fire Analysis: A Tour Of Functions",
     "section": "Mapping the Perimeter and falso color image",
-    "text": "Mapping the Perimeter and falso color image\nI really gotta check the CRSs\n\n# Check if thomas_fire and Landsat have matching CRSs\nprint(\"Landsat CRS:\", landsat.rio.crs)\nprint(\"Thomas Fire CRS:\", thomas_fire.crs)\n\n# Reproject thomas_fire to match the CRS of the landsat data if they do not match\nif thomas_fire.crs != landsat.rio.crs:\n    thomas_fire = thomas_fire.to_crs(landsat.rio.crs)\n\nLandsat CRS: EPSG:32611\nThomas Fire CRS: EPSG:3857\n\n\n\nThe final map:\n\n# Plot False Color Image\nfig, ax = plt.subplots(figsize=(10, 10))\nlandsat[['swir22', 'nir08', 'red']].to_array().plot.imshow(ax=ax, \n                                                           robust=True, \n                                                           alpha=0.8)\n\n# Plot Thomas Fire perimeter\nthomas_fire.plot(ax=ax, \n                       edgecolor='maroon', \n                       facecolor='none', \n                       linewidth=2)\n\n# Create a custom legend\nfire_legend = mpatches.Patch(edgecolor='maroon', \n                             facecolor='none', \n                             label=\"Thomas Fire Perimeter\")\n\n# Add legend manually\nax.legend(handles=[fire_legend], \n          loc=\"upper right\", \n          fontsize=12)\n\n# Label the map\nax.set_title(\"False Color Image of the 2017 Thomas Fire Perimeter In Santa Barbara County\", fontsize=16)\nax.set_xlabel(\"X Coordinate\")\nax.set_ylabel(\"Y Coordinate\")\n\nplt.show()\n\n\n\n\n\n\n\n\nAnd there you have it. Here is the map with the fire perimeter overlayed. One of the reasons false color imagery can be useful is that it can highlight where vegetation was most effect. We can see that not all the vegetation in the fire perimeter was impacted the same amount. This can shed light on why fires burn the way they do, which in turn can help us with fire management.\nI hope you enjoyed this wordy blog post, and now have a couple more functions under your belt you can use next time you want to do analysis on a wildfire!\nCitations\nRiebeek, R. (2014, March 4). Why is that Forest Red and that cloud blue?. NASA. https://earthobservatory.nasa.gov/features/FalseColor"
+    "text": "Mapping the Perimeter and falso color image\nI really gotta check the CRSs\n\n# Check if thomas_fire and Landsat have matching CRSs\nprint(\"Landsat CRS:\", landsat.rio.crs)\nprint(\"Thomas Fire CRS:\", thomas_fire.crs)\n\n# Reproject thomas_fire to match the CRS of the landsat data if they do not match\nif thomas_fire.crs != landsat.rio.crs:\n    thomas_fire = thomas_fire.to_crs(landsat.rio.crs)\n\nLandsat CRS: EPSG:32611\nThomas Fire CRS: EPSG:3857\n\n\n\nThe Final Map:\n\n# Plot False Color Image\nfig, ax = plt.subplots(figsize=(10, 10))\nlandsat[['swir22', 'nir08', 'red']].to_array().plot.imshow(ax=ax, \n                                                           robust=True, \n                                                           alpha=0.8)\n\n# Plot Thomas Fire perimeter\nthomas_fire.plot(ax=ax, \n                       edgecolor='maroon', \n                       facecolor='none', \n                       linewidth=2)\n\n# Create a custom legend\nfire_legend = mpatches.Patch(edgecolor='maroon', \n                             facecolor='none', \n                             label=\"Thomas Fire Perimeter\")\n\n# Add legend manually\nax.legend(handles=[fire_legend], \n          loc=\"upper right\", \n          fontsize=12)\n\n# Label the map\nax.set_title(\"False Color Image of the 2017 Thomas Fire Perimeter In Santa Barbara County\", fontsize=16)\nax.set_xlabel(\"X Coordinate\")\nax.set_ylabel(\"Y Coordinate\")\n\nplt.show()\n\n\n\n\n\n\n\n\nAnd there you have it. Here is the map with the fire perimeter overlayed. One of the reasons false color imagery can be useful is that it can highlight where vegetation was most effect. We can see that not all the vegetation in the fire perimeter was impacted the same amount. This can shed light on why fires burn the way they do, which in turn can help us with fire management.\nI hope you enjoyed this wordy blog post, and now have a couple more functions under your belt you can use next time you want to do analysis on a wildfire!\nReferences\nAndone, D. (2018, June 2). The largest wildfire in California’s modern history is finally out, more than 6 months after it started. CNN. Retrieved December 2, 2024, from https://www.cnn.com/2018/06/02/us/thomas-fire-officially-out/index.html\nRiebeek, R. (2014, March 4). Why is that Forest Red and that cloud blue? NASA. https://earthobservatory.nasa.gov/features/FalseColor\nU.S. Environmental Protection Agency. (2024, June 20). Particulate matter (PM) basics. EPA. Retrieved December 2, 2024, from https://www.epa.gov/pm-pollution/particulate-matter-pm-basics"
   },
   {
     "objectID": "about.html",
@@ -109,7 +88,7 @@
     "href": "blog_posts.html",
     "title": "Blog",
     "section": "",
-    "text": "The Great Thomas Fire Analysis\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nblog post title\n\n\n\nQuarto\n\n\nMEDS\n\n\ntest-post\n\n\n\nA short catchy description of a blog post\n\n\n\nAmanda Overbye\n\n\nOct 18, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "The Great Thomas Fire Analysis: A Tour Of Functions\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nblog post title\n\n\n\nQuarto\n\n\nMEDS\n\n\ntest-post\n\n\n\nA short catchy description of a blog post\n\n\n\nAmanda Overbye\n\n\nOct 18, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",

@@ -6,6 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Amanda G. Overbye">
+<meta name="dcterms.date" content="2024-12-04">
+<meta name="description" content="Analyzing the Impact Of the Thomas Fire Using a Handful Of Functions">
 
 <title>The Great Thomas Fire Analysis: A Tour Of Functions – Amanda Overbye</title>
 <style>
@@ -151,15 +154,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page">
+    <div class="quarto-title column-page-left">
       <h1 class="title">The Great Thomas Fire Analysis: A Tour Of Functions</h1>
-                      </div>
+                  <div>
+        <div class="description">
+          Analyzing the Impact Of the Thomas Fire Using a Handful Of Functions
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Python</div>
+                <div class="quarto-category">MEDS</div>
+                <div class="quarto-category">Geospatial</div>
+                <div class="quarto-category">Wildfire</div>
+              </div>
+                  </div>
   </div>
     
-  
-  <div class="quarto-title-meta column-page">
+  <div class="quarto-title-meta-author column-page-left">
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Affiliation</div>
+    
+      <div class="quarto-title-meta-contents">
+      <p class="author"><a href="https:/aoverbye.github.io">Amanda G. Overbye</a> </p>
+    </div>
+    <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              <a href="https://bren.ucsb.edu/masters-programs/master-environmental-data-science">
+              MEDS
+              </a>
+            </p>
+        </div>
+    </div>
 
-      
+  <div class="quarto-title-meta column-page-left">
+
+        
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">December 4, 2024</p>
+      </div>
+    </div>
     
       
     </div>
@@ -168,17 +203,56 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-great-thomas-fire-analysis-a-tour-of-functions" id="toc-the-great-thomas-fire-analysis-a-tour-of-functions" class="nav-link active" data-scroll-target="#the-great-thomas-fire-analysis-a-tour-of-functions">The Great Thomas Fire Analysis: A Tour Of Functions</a>
+  <ul class="collapse">
+  <li><a href="#amanda-g.-overbye" id="toc-amanda-g.-overbye" class="nav-link" data-scroll-target="#amanda-g.-overbye">Amanda G. Overbye</a></li>
+  </ul></li>
+  <li><a href="#part-1.-visualizing-aqi" id="toc-part-1.-visualizing-aqi" class="nav-link" data-scroll-target="#part-1.-visualizing-aqi">Part 1. Visualizing AQI</a>
+  <ul class="collapse">
+  <li><a href="#a-sweeping-explanation-of-data-cleaning" id="toc-a-sweeping-explanation-of-data-cleaning" class="nav-link" data-scroll-target="#a-sweeping-explanation-of-data-cleaning">A Sweeping Explanation of Data Cleaning</a></li>
+  <li><a href="#setting-the-index-as-the-date" id="toc-setting-the-index-as-the-date" class="nav-link" data-scroll-target="#setting-the-index-as-the-date">Setting the Index As the Date</a></li>
+  <li><a href="#averaging-the-aqi-over-time" id="toc-averaging-the-aqi-over-time" class="nav-link" data-scroll-target="#averaging-the-aqi-over-time">Averaging The AQI Over Time</a>
+  <ul class="collapse">
+  <li><a href="#the-rolling-function" id="toc-the-rolling-function" class="nav-link" data-scroll-target="#the-rolling-function">The <code>rolling()</code> function</a></li>
+  <li><a href="#plot" id="toc-plot" class="nav-link" data-scroll-target="#plot">Plot</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#part-2.-using-false-color-imagery-to-view-the-impact-of-the-fire-one-vegetation." id="toc-part-2.-using-false-color-imagery-to-view-the-impact-of-the-fire-one-vegetation." class="nav-link" data-scroll-target="#part-2.-using-false-color-imagery-to-view-the-impact-of-the-fire-one-vegetation.">Part 2. Using False Color Imagery to view the impact of the fire one vegetation.</a>
+  <ul class="collapse">
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#filtering-the-data-for-the-2017-thomas-fire-and-creating-a-geojson-file" id="toc-filtering-the-data-for-the-2017-thomas-fire-and-creating-a-geojson-file" class="nav-link" data-scroll-target="#filtering-the-data-for-the-2017-thomas-fire-and-creating-a-geojson-file">Filtering The Data For the 2017 Thomas Fire and Creating a GeoJSON File</a></li>
+  <li><a href="#the-to_file-function" id="toc-the-to_file-function" class="nav-link" data-scroll-target="#the-to_file-function">The <code>to_file()</code> Function</a></li>
+  <li><a href="#dropping-bands" id="toc-dropping-bands" class="nav-link" data-scroll-target="#dropping-bands">Dropping bands</a>
+  <ul class="collapse">
+  <li><a href="#the-squeeze-function" id="toc-the-squeeze-function" class="nav-link" data-scroll-target="#the-squeeze-function">The <code>Squeeze()</code> Function</a></li>
+  <li><a href="#plotting-the-true-color-image" id="toc-plotting-the-true-color-image" class="nav-link" data-scroll-target="#plotting-the-true-color-image">Plotting the True Color Image</a></li>
+  <li><a href="#the-imshowrobust-true-function" id="toc-the-imshowrobust-true-function" class="nav-link" data-scroll-target="#the-imshowrobust-true-function">The <code>imshow(robust = True)</code> Function</a></li>
+  <li><a href="#plotting-the-false-color-image" id="toc-plotting-the-false-color-image" class="nav-link" data-scroll-target="#plotting-the-false-color-image">Plotting The False Color Image</a></li>
+  </ul></li>
+  <li><a href="#mapping-the-perimeter-and-falso-color-image" id="toc-mapping-the-perimeter-and-falso-color-image" class="nav-link" data-scroll-target="#mapping-the-perimeter-and-falso-color-image">Mapping the Perimeter and falso color image</a>
+  <ul class="collapse">
+  <li><a href="#the-final-map" id="toc-the-final-map" class="nav-link" data-scroll-target="#the-final-map">The Final Map:</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 
 
 
-<p>title: “Thomas Fire Blog” description: “Analyzing the Impact Of the Thomas Fire Using a Handful Of Functions” author: - name: Amanda G. Overbye url: https:/aoverbye.github.io orcir: 000-002-5300-3075 affiliation: MEDS affiliation-url: https://bren.ucsb.edu/masters-programs/master-environmental-data-science date: 2024-12-03 categories: [Python, MEDS, Geospatial, Wildfire] toc: true draft: false draft-mode: visible</p>
-<section id="amanda-g.-overbye-remember-to-do-the-read-me" class="level3">
-<h3 class="anchored" data-anchor-id="amanda-g.-overbye-remember-to-do-the-read-me">Amanda G. Overbye REMEMBER TO DO THE READ ME</h3>
+<section id="the-great-thomas-fire-analysis-a-tour-of-functions" class="level1">
+<h1>The Great Thomas Fire Analysis: A Tour Of Functions</h1>
+<section id="amanda-g.-overbye" class="level3">
+<h3 class="anchored" data-anchor-id="amanda-g.-overbye">Amanda G. Overbye</h3>
 <p>github: https://github.com/Aoverbye/thomas_fire_analysis</p>
 <p>Have you ever dreamed of analyzing a wildfire all by yourself using Python and a handful of functions? Well if you have, today is your lucky day! The goal of this blog post is to give a quick guide on how to do just that so you can make your dream come true or live vicariously through me. First lets go over some background on the Thomas Fire that impacted Santa Barbara and the surrounding areas.</p>
 <p>I am going to be doing this in two parts. In the first part I am going to be making a graph to visualize how the fire impacted air quality or the AQI. For the second part, I am going to be using false color imagery to get a bettet picture, or just a picture atleast, of the impact the fire had on vegetation in the area. Like I mentioned earilier, this post is going to highlight the functions I am going to use,</p>
@@ -198,7 +272,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="some-background-on-the-data" class="level4">
 <h4 class="anchored" data-anchor-id="some-background-on-the-data">Some Background on the Data</h4>
 <p>I am going to be using three data sets. Each data set should be openly available to use. I will talk more about the data in the sections where I use it.</p>
-<p>https://www.cnn.com/2018/06/02/us/thomas-fire-officially-out/index.html</p>
+</section>
 </section>
 </section>
 <section id="part-1.-visualizing-aqi" class="level1">
@@ -269,8 +343,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>aqi_sb <span class="op">=</span> aqi_sb[[<span class="st">'date'</span>, <span class="st">'aqi'</span>, <span class="st">'category'</span>, <span class="st">'defining_parameter'</span>, <span class="st">'defining_site'</span>, <span class="st">'number_of_sites_reporting'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="setting-the-index-as-date" class="level2">
-<h2 class="anchored" data-anchor-id="setting-the-index-as-date">Setting the index as date</h2>
+<section id="setting-the-index-as-the-date" class="level2">
+<h2 class="anchored" data-anchor-id="setting-the-index-as-the-date">Setting the Index As the Date</h2>
 <p>The data is being analyzed over time, and setting the date as the index allows for more convenient handling of time-based operations. By changing the index I am making sure that me and computer are on the same page besides the webpage.</p>
 <div id="fab9918c-be87-4532-8790-e0c0f258bd9c" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Update the `date` column to be datetime object</span></span>
@@ -290,7 +364,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="plot" class="level3">
 <h3 class="anchored" data-anchor-id="plot">Plot</h3>
 <p>The end result of this analysis is a plot. In regards to AQI, the higher the value, the worse the air quality. There is a spike where December is, which is what I expected because that is when the fire was.</p>
-<p><em>“For example, an AQI value of 50 or below represents good air quality, while an AQI value over 300 represents hazardous air quality.”</em></p>
 <div id="ff39fc4c-95cc-41c5-a1ca-5bdf711c2936" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate AQI rolling average over 5 days</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>rolling_average <span class="op">=</span> aqi_sb[<span class="st">'aqi'</span>].rolling(<span class="st">'5D'</span>).mean()</span>
@@ -308,7 +381,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="thomas_fire_blog_draft_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="thomas_fire_blog_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -349,7 +422,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="thomas_fire_blog_draft_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="thomas_fire_blog_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -401,7 +474,7 @@ Data variables:
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="thomas_fire_blog_draft_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="thomas_fire_blog_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -410,15 +483,14 @@ Data variables:
 <section id="plotting-the-false-color-image" class="level3">
 <h3 class="anchored" data-anchor-id="plotting-the-false-color-image">Plotting The False Color Image</h3>
 <p>I used SWIR, NIR, Green because it can be especially helpful when looking at fires at it shows healthy vegetation as bright green.</p>
-<p>Even without the fire perimeter overlayed, it is easy to tell where the fire was based on this false color image. The areas in red are the areas that were burning <strong>fix this</strong></p>
-<p>Source https://earthobservatory.nasa.gov/features/FalseColor</p>
+<p>Even without the fire perimeter overlayed, it is easy to tell where the fire was based on this false color image. The areas in red are the areas that were burning.</p>
 <div id="ea894019-9986-43ff-ba33-ce7997d12de1" class="cell" data-tags="[]" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select SWIR, NIR, and Red bands and plot false color image</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>landsat[[<span class="st">'swir22'</span>, <span class="st">'nir08'</span>, <span class="st">'red'</span>]].to_array().plot.imshow(robust<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="thomas_fire_blog_draft_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="thomas_fire_blog_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -475,7 +547,7 @@ Thomas Fire CRS: EPSG:3857</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="thomas_fire_blog_draft_files/figure-html/cell-13-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="thomas_fire_blog_files/figure-html/cell-13-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>

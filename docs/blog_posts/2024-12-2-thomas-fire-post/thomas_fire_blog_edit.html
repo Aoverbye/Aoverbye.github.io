@@ -222,7 +222,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#plot" id="toc-plot" class="nav-link" data-scroll-target="#plot">Plot</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#part-2.-using-false-color-imagery-to-view-the-impact-of-the-fire-one-vegetation." id="toc-part-2.-using-false-color-imagery-to-view-the-impact-of-the-fire-one-vegetation." class="nav-link" data-scroll-target="#part-2.-using-false-color-imagery-to-view-the-impact-of-the-fire-one-vegetation.">Part 2. Using False Color Imagery to view the impact of the fire one vegetation.</a>
+  <li><a href="#part-2.-using-false-color-imagery-to-view-the-impact-of-the-fire-on-vegetation." id="toc-part-2.-using-false-color-imagery-to-view-the-impact-of-the-fire-on-vegetation." class="nav-link" data-scroll-target="#part-2.-using-false-color-imagery-to-view-the-impact-of-the-fire-on-vegetation.">Part 2. Using False Color Imagery to view the impact of the fire on vegetation.</a>
   <ul class="collapse">
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
   <li><a href="#filtering-the-data-for-the-2017-thomas-fire-and-creating-a-geojson-file" id="toc-filtering-the-data-for-the-2017-thomas-fire-and-creating-a-geojson-file" class="nav-link" data-scroll-target="#filtering-the-data-for-the-2017-thomas-fire-and-creating-a-geojson-file">Filtering The Data For the 2017 Thomas Fire and Creating a GeoJSON File</a></li>
@@ -234,10 +234,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#the-imshowrobust-true-function" id="toc-the-imshowrobust-true-function" class="nav-link" data-scroll-target="#the-imshowrobust-true-function">The <code>imshow(robust = True)</code> Function</a></li>
   <li><a href="#plotting-the-false-color-image" id="toc-plotting-the-false-color-image" class="nav-link" data-scroll-target="#plotting-the-false-color-image">Plotting The False Color Image</a></li>
   </ul></li>
-  <li><a href="#mapping-the-perimeter-and-falso-color-image" id="toc-mapping-the-perimeter-and-falso-color-image" class="nav-link" data-scroll-target="#mapping-the-perimeter-and-falso-color-image">Mapping the Perimeter and falso color image</a>
+  <li><a href="#mapping-the-perimeter-and-false-color-image" id="toc-mapping-the-perimeter-and-false-color-image" class="nav-link" data-scroll-target="#mapping-the-perimeter-and-false-color-image">Mapping the Perimeter and false color image</a>
   <ul class="collapse">
   <li><a href="#the-final-map" id="toc-the-final-map" class="nav-link" data-scroll-target="#the-final-map">The Final Map:</a></li>
   </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -253,21 +254,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>The Great Thomas Fire Analysis: A Tour Of Functions</h1>
 <section id="amanda-g.-overbye" class="level3">
 <h3 class="anchored" data-anchor-id="amanda-g.-overbye">Amanda G. Overbye</h3>
-<p>github: https://github.com/Aoverbye/thomas_fire_analysis</p>
-<p>Have you ever dreamed of analyzing a wildfire all by yourself using Python and a handful of functions? Well if you have, today is your lucky day! The goal of this blog post is to give a quick guide on how to do just that so you can make your dream come true or live vicariously through me. First lets go over some background on the Thomas Fire that impacted Santa Barbara and the surrounding areas.</p>
-<p>I am going to be doing this in two parts. In the first part I am going to be making a graph to visualize how the fire impacted air quality or the AQI. For the second part, I am going to be using false color imagery to get a bettet picture, or just a picture atleast, of the impact the fire had on vegetation in the area. Like I mentioned earilier, this post is going to highlight the functions I am going to use,</p>
+<p><a href="https://github.com/Aoverbye/thomas_fire_analysis">Github</a></p>
+<p>Have you ever dreamed of analyzing a wildfire all by yourself using Python and a handful of functions? Well if you have, today is your lucky day! The goal of this blog post is to give a quick guide on how to do just that so you can make your dream come true or live vicariously through me. First, let’s go over some background on the Thomas Fire that impacted Santa Barbara and the surrounding areas.</p>
+<p>I am going to be doing this in two parts. In the first part, I will be making a graph to visualize how the fire impacted air quality or the AQI. For the second part, I am going to be using false color imagery to get a better picture, or just a picture at least, of the impact the fire had on vegetation in the area. As I mentioned earlier, this post is going to highlight the functions I am going to use,</p>
 <p>And the functions are…</p>
 <ul>
 <li><code>Concat()</code></li>
 <li><code>Rolling()</code></li>
 <li><code>To_file()</code></li>
 <li><code>Squeeze()</code></li>
-<li><code>imshow()</code></li>
+<li><code>Imshow()</code></li>
 </ul>
-<p>Throughout this analysis, I am going to highlight the places where I used the functions, mention the library they are from, and explain, roughly, what they do. In addition to the functions I will be highlighting overall skills I will use in each section.</p>
+<p>Throughout this analysis, I will highlight the places where I used the functions, mention the library they are from, and explain, roughly, what they do. In addition to the functions, I will be highlighting the overall skills I will use in each section.</p>
 <section id="some-background-on-the-thomas-fire" class="level4">
 <h4 class="anchored" data-anchor-id="some-background-on-the-thomas-fire">Some Background on the Thomas Fire</h4>
-<p>The Thomas Fire was an extremely large wildfire that burned 378,000 acres from December 4th 2017 to January 12th 2018. At the time, it was considered the largest wildlife in modern California history. The fire caused massive destruction both from the flames and the subsequent mudslides. It was truly devestating. Hopefully in learning to do these analysis we can help in finding new ways to midigate and respond to these disasters.</p>
+<p>The Thomas Fire was an extremely large wildfire that burned 378,000 acres from December 4th, 2017 to January 12th, 2018. At the time, it was considered the largest wildlife in modern California history. The fire caused massive destruction both from the flames and the subsequent mudslides. It was truly devastating. Hopefully, in learning to do this analysis we can help in finding new ways to mitigate and respond to these disasters.</p>
 </section>
 <section id="some-background-on-the-data" class="level4">
 <h4 class="anchored" data-anchor-id="some-background-on-the-data">Some Background on the Data</h4>
@@ -277,15 +278,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="part-1.-visualizing-aqi" class="level1">
 <h1>Part 1. Visualizing AQI</h1>
-<p>The data we are going to be using is about Air Quality Index (AQI) from the <a href="https://aqs.epa.gov/aqsweb/airdata/download_files.html#AQI">US Environmental Protection Agency</a>. The particular data sets we are using are from 2017 and 2018 and go by county. This dataset has measurements of criteria gases (things like ground-level ozone, carbon monoxide, sulfur dioxide, lead, etc.), and Particulate Matter (PM10 and PM2.5). Particulate matter is just a bunch of super tiny bits of debris that float in the air and can get in our lungs. It is measured by its diameter in microns, which are one-millionth of a meter. PM10 is larger and can sometimes be visable, whereas PM2.5 is super, super tiny and can get in our bloodstream through our lung tissue. Unsurprisingly, it is bad for us. Particulate matter is often generated by fires through all the burning, and thats why I would like to measure it here.</p>
-<p>My goal for this section is to create a simple graph that will show the measurement of AQI over time. There are going be a couple steps in this process</p>
+<p>The data we are going to be using is about the Air Quality Index (AQI) from the <a href="https://aqs.epa.gov/aqsweb/airdata/download_files.html#AQI">US Environmental Protection Agency</a>. The particular data sets we are using are from 2017 and 2018 and go by county. This dataset has measurements of criteria gases (things like ground-level ozone, carbon monoxide, sulfur dioxide, lead, etc.), and Particulate Matter (PM10 and PM2.5). Particulate matter is just a bunch of super tiny bits of debris that float in the air and can get into our lungs. It is measured by its diameter in microns, which are one-millionth of a meter. PM10 is larger and can sometimes be visible, whereas PM2.5 is super, super tiny and can get into our bloodstream through our lung tissue. Unsurprisingly, it is bad for us. Particulate matter is often generated by fires through all the burning, and that is why I would like to measure it here.</p>
+<p>My goal for this section is to create a simple graph that will show the measurement of AQI over time. There are going to be a couple of steps in this process.</p>
 <ol type="1">
 <li>Cleaning the data</li>
 <li>Changing the index</li>
 <li>Averaging data</li>
 <li>Visualizing data</li>
 </ol>
-<p>So lets begin!</p>
+<p>So let’s begin!</p>
 <div id="5653e2bd-027a-4ca1-86de-64b74166342b" class="cell" data-tags="[]" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import Libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -298,7 +299,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="3d363a12-d7e7-445e-8bdf-9889f9fd1814" class="cell" data-tags="[]" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data for the AQI analysis Read in data</span></span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in data for the AQI analysis</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>aqi_17 <span class="op">=</span> pd.read_csv(<span class="st">'https://aqs.epa.gov/aqsweb/airdata/daily_aqi_by_county_2017.zip'</span>, compression<span class="op">=</span><span class="st">'zip'</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>aqi_18 <span class="op">=</span> pd.read_csv(<span class="st">'https://aqs.epa.gov/aqsweb/airdata/daily_aqi_by_county_2018.zip'</span>, compression<span class="op">=</span><span class="st">'zip'</span>)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -316,16 +317,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>thomas_fire <span class="op">=</span> gpd.read_file(fp2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="8a5041ab-c890-4601-abb7-5b9d4a700fa6" class="cell" data-tags="[]" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Home work 4 fire perimeter data pre corpping?</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in California fire perameter data</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>fp <span class="op">=</span> os.path.join(<span class="st">'/'</span>, <span class="st">'Users'</span>, <span class="st">'overbye'</span>, <span class="st">'MEDS'</span>, <span class="st">'EDS-220'</span>, <span class="st">'eds220-hwk4'</span>, <span class="st">'data'</span>, <span class="st">'California_Fire_Perimeters_-9021497757356455187'</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the file for the Thomas Fire dataset using GeoPandas</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>ca_fires <span class="op">=</span> gpd.read_file(fp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in California fire perameter data</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fp <span class="op">=</span> os.path.join(<span class="st">'/'</span>, <span class="st">'Users'</span>, <span class="st">'overbye'</span>, <span class="st">'MEDS'</span>, <span class="st">'EDS-220'</span>, <span class="st">'eds220-hwk4'</span>, <span class="st">'data'</span>, <span class="st">'California_Fire_Perimeters_-9021497757356455187'</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the file for the Thomas Fire dataset using GeoPandas</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>ca_fires <span class="op">=</span> gpd.read_file(fp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="a-sweeping-explanation-of-data-cleaning" class="level2">
 <h2 class="anchored" data-anchor-id="a-sweeping-explanation-of-data-cleaning">A Sweeping Explanation of Data Cleaning</h2>
-<p>When starting a project, I am often struck by how much I do not like the format the data is in. This is something every young data scientist and coder must experience and develope on their own. We all must find a format that calls to us and spend the rest of our coding lives cleaning every data set we get until it is in that format. My own person favorite is lower snake case. It makes sense to me because we say lines of texts are like strings, and snakes are the most string like animal in my opinion.</p>
+<p>When starting a project, I am often struck by how much I do not like the format the data is in. This is something every young data scientist and coder must experience and develop on their own. We all must find a format that calls to us and spend the rest of our coding lives cleaning every data set we get until it is in that format. My personal favorite is lower snake case. It makes sense to me because we say lines of text are like strings, and snakes are the most string-like animals in my opinion.</p>
 <div id="35e66109-9f98-4de4-b1c2-b9393f0d77bc" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine the two data sets using pd.concat</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>aqi <span class="op">=</span> pd.concat([aqi_17, aqi_18], ignore_index<span class="op">=</span><span class="va">True</span>)</span>
@@ -345,7 +345,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="setting-the-index-as-the-date" class="level2">
 <h2 class="anchored" data-anchor-id="setting-the-index-as-the-date">Setting the Index As the Date</h2>
-<p>The data is being analyzed over time, and setting the date as the index allows for more convenient handling of time-based operations. By changing the index I am making sure that me and computer are on the same page besides the webpage.</p>
+<p>The data is being analyzed over time, and setting the date as the index allows for more convenient handling of time-based operations. By changing the index, I am making sure that I and the computer are on the same page beside the webpage.</p>
 <div id="fab9918c-be87-4532-8790-e0c0f258bd9c" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Update the `date` column to be datetime object</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>aqi_sb.date <span class="op">=</span> pd.to_datetime(aqi_sb[<span class="st">'date'</span>])</span>
@@ -359,11 +359,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In order to be able to see the impact of the fire on air quality, we need to know what the air quality was before.</p>
 <section id="the-rolling-function" class="level3">
 <h3 class="anchored" data-anchor-id="the-rolling-function">The <code>rolling()</code> function</h3>
-<p>Here we are using a function called rolling(). What this function does is it shows how something(averages?) change over time. They call them rolling window calculations because it calculates over a “window” of time, and sense time is moving the function must be moving too so we say its “rolling.” In the code, you may notice we put ‘5D’ in the parathesis, this is specifying what I want the window of time to be. Here I do 5D because I want it to be five days.</p>
+<p>Here we are using a function called rolling(). What this function does is show how averages change over time. They call them rolling window calculations because they calculate over a “window” of time, and since time is moving the function must be moving too so we say it’s “rolling.” In the code, you may notice we put ‘5D’ in the parathesis, this is specifying what I want the window of time to be. Here I do 5D because I want it to be five days.</p>
 </section>
 <section id="plot" class="level3">
 <h3 class="anchored" data-anchor-id="plot">Plot</h3>
-<p>The end result of this analysis is a plot. In regards to AQI, the higher the value, the worse the air quality. There is a spike where December is, which is what I expected because that is when the fire was.</p>
+<p>The result of this analysis is a plot. In regards to AQI, the higher the value, the worse the air quality. There is a spike where December is, which is what I expected because that is when the fire was</p>
 <div id="ff39fc4c-95cc-41c5-a1ca-5bdf711c2936" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate AQI rolling average over 5 days</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>rolling_average <span class="op">=</span> aqi_sb[<span class="st">'aqi'</span>].rolling(<span class="st">'5D'</span>).mean()</span>
@@ -381,7 +381,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="thomas_fire_blog_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="thomas_fire_blog_edit_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -389,27 +389,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 </section>
-<section id="part-2.-using-false-color-imagery-to-view-the-impact-of-the-fire-one-vegetation." class="level1">
-<h1>Part 2. Using False Color Imagery to view the impact of the fire one vegetation.</h1>
-<p>False color imagery is a way to see different colors in an image than we would normally with just the naked eye. It can be especially helpful when dealing with wild fires because it can allow us to see beyond the smoke and it can highlight healthy vegetation. The next section is going to demonstraight how to create a false color image in python.</p>
+<section id="part-2.-using-false-color-imagery-to-view-the-impact-of-the-fire-on-vegetation." class="level1">
+<h1>Part 2. Using False Color Imagery to view the impact of the fire on vegetation.</h1>
+<p>False color imagery is a way to see different colors in an image than we would normally with just the naked eye. It can be especially helpful when dealing with wildfires because it can allow us to see beyond the smoke and it can highlight healthy vegetation. The next section is going to demonstrate how to create a false color image in Python.</p>
 <p>The skills for this section include:</p>
 <ul>
 <li>Filtering geo data and saving it as a file</li>
 <li>Dropping bands on geospatial data</li>
 <li>Creating and plotting a “true” color RGB image</li>
-<li>Creating an false color image</li>
+<li>Creating a false color image</li>
 </ul>
 <section id="data" class="level3">
 <h3 class="anchored" data-anchor-id="data">Data</h3>
-<p>For this part of my project I will be using data from <a href="https://planetarycomputer.microsoft.com/dataset/landsat-c2-l2">Microsofts Landsat Collection 2 Level-2 satellite imagery</a> and data from the <a href="https://catalog.data.gov/dataset/california-fire-perimeters-all-b3436">California Fire Perimeters (all) dataset</a></p>
+<p>For this part of my project, I will be using data from <a href="https://planetarycomputer.microsoft.com/dataset/landsat-c2-l2">Microsoft Landsat Collection 2 Level-2 satellite imagery</a> and data from the <a href="https://catalog.data.gov/dataset/california-fire-perimeters-all-b3436">California Fire Perimeters (all) dataset</a></p>
 </section>
 <section id="filtering-the-data-for-the-2017-thomas-fire-and-creating-a-geojson-file" class="level3">
 <h3 class="anchored" data-anchor-id="filtering-the-data-for-the-2017-thomas-fire-and-creating-a-geojson-file">Filtering The Data For the 2017 Thomas Fire and Creating a GeoJSON File</h3>
-<p>After doing all the data cleaning and filtering before this next part should be relevily easy. I am going to take the data for the CALFIRE and filter it by the year (there have been multiple Thomas Fires), and plot it.</p>
+<p>After doing all the data cleaning and filtering this next part should be relevily easy. I am going to take the data from CALFIRE and filter it by the year (there have been multiple Thomas Fires), and plot it.</p>
 </section>
 <section id="the-to_file-function" class="level3">
 <h3 class="anchored" data-anchor-id="the-to_file-function">The <code>to_file()</code> Function</h3>
-<p>This is a function that comes from the GeoPandas library. Very practically named, it takes a GeoDataFrame and saves it as a file. Below I specified that I wanted a GeoJSON file (so that I could have one file instead of multiple). If not specifies, it will default to a shapefile.</p>
+<p>This is a function that comes from the GeoPandas library. Very practically named, it takes a GeoDataFrame and saves it as a file. Below I specified that I wanted a GeoJSON file (so that I could have one file instead of multiple). If not specified, it will default to a shapefile.</p>
 <div id="6482ffc3-a605-4bf5-9880-588e5f7ae6dc" class="cell" data-tags="[]" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for the 2017 Thomas Fire</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>thomas_fire <span class="op">=</span> ca_fires[(ca_fires[<span class="st">'YEAR_'</span>] <span class="op">==</span> <span class="dv">2017</span>) <span class="op">&amp;</span> (ca_fires[<span class="st">'FIRE_NAME'</span>] <span class="op">==</span> <span class="st">'THOMAS'</span>)]</span>
@@ -422,7 +422,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="thomas_fire_blog_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="thomas_fire_blog_edit_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -430,10 +430,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="dropping-bands" class="level2">
 <h2 class="anchored" data-anchor-id="dropping-bands">Dropping bands</h2>
-<p>I am now going to be working with my landsat data. I can see when I print the data set that it has an extra band that will not be neccessary in our analysis.</p>
+<p>I am now going to be working with my Landsat data. I can see when I print the data set that it has an extra band that will not be necessary in this analysis.</p>
 <section id="the-squeeze-function" class="level3">
 <h3 class="anchored" data-anchor-id="the-squeeze-function">The <code>Squeeze()</code> Function</h3>
-<p>The squeeze() function is from the Numpy library and allows us to get rid of any dimensions with the size of 1. This keeps the data from taking up to much space, it will also help me remove the band so I can replace it with my own band.</p>
+<p>The squeeze() function is from the Numpy library and allows us to get rid of any dimensions with the size of 1. This keeps the data from taking up too much space. It will also help me remove the band so I can replace it with my own band.</p>
 <div id="61f09718-b62e-4411-8c42-678d7e230f68" class="cell" data-tags="[]" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print to get a general overview of the landsat data</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(landsat)</span>
@@ -462,11 +462,11 @@ Data variables:
 </section>
 <section id="plotting-the-true-color-image" class="level3">
 <h3 class="anchored" data-anchor-id="plotting-the-true-color-image">Plotting the True Color Image</h3>
-<p>This is where I have replaced the band I dropped earlier with red, green blue</p>
+<p>This is where I have replaced the band I dropped earlier with red, green, and blue.</p>
 </section>
 <section id="the-imshowrobust-true-function" class="level3">
 <h3 class="anchored" data-anchor-id="the-imshowrobust-true-function">The <code>imshow(robust = True)</code> Function</h3>
-<p>The imshow() function comes from the xarray library and works with a function of the same name from the matplotlib.pyplot. This is af unction that shows a 2-D pictures. Incorporating the the xarray library makes it extra useful here because I can use the (robust = True) arguement to ignore any outlier colors, which creates a more realistic looking picture.</p>
+<p>The <code>imshow()</code> function comes from the xarray library and works with a function of the same name from the matplotlib.pyplot. This is a function that shows a 2-D picture. Incorporating the the xarray library makes it extra useful here because I can use the (robust = True) argument to ignore any outlier colors, which creates a more realistic-looking picture.</p>
 <div id="11259d54-c001-4726-9234-667bd349f368" class="cell" data-tags="[]" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select 'red' 'green' and 'blue' bands</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to a NumPy array using .to_array()</span></span>
@@ -474,7 +474,7 @@ Data variables:
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="thomas_fire_blog_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="thomas_fire_blog_edit_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -482,7 +482,7 @@ Data variables:
 </section>
 <section id="plotting-the-false-color-image" class="level3">
 <h3 class="anchored" data-anchor-id="plotting-the-false-color-image">Plotting The False Color Image</h3>
-<p>I used SWIR, NIR, Green because it can be especially helpful when looking at fires at it shows healthy vegetation as bright green.</p>
+<p>I used SWIR, NIR, and Green because they can be especially helpful when looking at fires as they show healthy vegetation as bright green.</p>
 <p>Even without the fire perimeter overlayed, it is easy to tell where the fire was based on this false color image. The areas in red are the areas that were burning.</p>
 <div id="ea894019-9986-43ff-ba33-ce7997d12de1" class="cell" data-tags="[]" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select SWIR, NIR, and Red bands and plot false color image</span></span>
@@ -490,16 +490,15 @@ Data variables:
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="thomas_fire_blog_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="thomas_fire_blog_edit_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
 </section>
-<section id="mapping-the-perimeter-and-falso-color-image" class="level2">
-<h2 class="anchored" data-anchor-id="mapping-the-perimeter-and-falso-color-image">Mapping the Perimeter and falso color image</h2>
-<p>I really gotta check the CRSs</p>
+<section id="mapping-the-perimeter-and-false-color-image" class="level2">
+<h2 class="anchored" data-anchor-id="mapping-the-perimeter-and-false-color-image">Mapping the Perimeter and false color image</h2>
 <div id="407be4d7-7113-482c-9d40-a1ee3d7c952a" class="cell" data-tags="[]" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if thomas_fire and Landsat have matching CRSs</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Landsat CRS:"</span>, landsat.rio.crs)</span>
@@ -547,20 +546,22 @@ Thomas Fire CRS: EPSG:3857</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="thomas_fire_blog_files/figure-html/cell-13-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="thomas_fire_blog_edit_files/figure-html/cell-13-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>And there you have it. Here is the map with the fire perimeter overlayed. One of the reasons false color imagery can be useful is that it can highlight where vegetation was most effect. We can see that not all the vegetation in the fire perimeter was impacted the same amount. This can shed light on why fires burn the way they do, which in turn can help us with fire management.</p>
-<p>I hope you enjoyed this wordy blog post, and now have a couple more functions under your belt you can use next time you want to do analysis on a wildfire!</p>
-<p>References</p>
+<p>And there you have it. Here is the map with the fire perimeter overlayed. One of the reasons false color imagery can be useful is that it can highlight where vegetation was most affected. We can see that not all the vegetation in the fire perimeter was impacted by the same amount. This can shed light on why fires burn the way they do, which, in turn, can help us with fire management.</p>
+<p>I hope you enjoyed this wordy blog post, and now have a couple more functions under your belt you can use next time you want to analyze a wildfire!</p>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
 <p>Andone, D. (2018, June 2). <em>The largest wildfire in California’s modern history is finally out, more than 6 months after it started</em>. CNN. Retrieved December 2, 2024, from https://www.cnn.com/2018/06/02/us/thomas-fire-officially-out/index.html</p>
 <p>Riebeek, R. (2014, March 4). <em>Why is that Forest Red and that cloud blue?</em> NASA. https://earthobservatory.nasa.gov/features/FalseColor</p>
 <p>U.S. Environmental Protection Agency. (2024, June 20). <em>Particulate matter (PM) basics.</em> EPA. Retrieved December 2, 2024, from https://www.epa.gov/pm-pollution/particulate-matter-pm-basics</p>
 
 
-</section>
 </section>
 </section>
 

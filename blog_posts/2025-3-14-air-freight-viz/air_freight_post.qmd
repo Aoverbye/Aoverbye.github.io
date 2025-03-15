@@ -3,6 +3,7 @@ title: "The Freight That Flies"
 author: "Amanda Overbye"
 date: 03/15/2025
 toc: true
+image: final_infograph.png
 editor_options: 
   chunk_output_type: console
 editor: 

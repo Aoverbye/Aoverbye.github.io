@@ -48,7 +48,7 @@ library(showtext)
 library(ggbump)
 ```
 
-# Creating an infographic using R data visualizations to answer questions about air freight shipping.
+# Exploring Air Freight: Visualizing the Journey of Airborne Cargo Using R
 
 I have been watching airplanes fly by all of my life. I have always
 found myself looking at the airplanes and wondering who or what is on
@@ -61,7 +61,7 @@ As a student in the Masters in Environmental Data Science program at the
 University of California Santa Barbara, I was given the opportunity to
 create some data visualizations on any topic of my choosing so I decided
 I would answer my mostly life long question about airplanes and
-shipping. I mainly wanted to know where are planes coming from and going
+shipping. I wanted to know where are planes coming from and going
 to? How much do we actually ship via freight? How has this changed over
 time? This is a guide on how I created the visuals I used to answer
 these questions.
@@ -70,18 +70,7 @@ these questions.
 
 ### Background on data
 
-The data I am using comes from the department of transportation.
-Specifically, I used the [Air Carriers : T-100 International Segment for
-US carriers only
-data](https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=GDK). This data
-set contains information about all flights that are flying to and from
-the United States from international areas. The main variable I was
-interested in were those in regards to the amount of freight in pounds
-transported, and the departure and destination information. While the
-data included the International Air Transport Association, a 3 letter
-code given to airports based on location, it lacked any coordinate
-information. To gain the coordinate information, I used the airportr
-package and then combined the datasets.
+The data comes from the Department of Transportation's [Air Carriers: T-100 International Segment for US carriers only data](https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=GDK). This contains information on all international flights to and from the United States, focusing primarily on freight volume (in pounds) and departure/destination details. While the dataset included IATA airport codes (3-letter location identifiers), it lacked geographic coordinates. I added this information by using the airportr package and merging the datasets.
 
 ### Data loading
 
@@ -157,7 +146,7 @@ air_coords <- airports %>%
 # The Map
 
 The first visualization I wanted to create was a map showing which
-airports had the largest amount of pounds traveling between them. While
+airports had the largest amount of freight in pounds traveling between them. While
 the map adequately visualized the the connections between the airports,
 it should be noted that it does not accurately show the route the planes
 took. For example, a plane flying from Anchorage Alaska to South Korea
@@ -212,18 +201,6 @@ freight_coords <- freight_map_data %>%
             by = "iata_origin")
 ```
 
-### Refining the data for the map
-
-Before I could actually create the map, I had to get the data for the
-for the locations that had the most amount of freight in pounds
-traveling between them. I began by using the group_by dplyr function to
-tell the program that I wanted all the rows where freight was shipped
-between the same two airports to be treated as a single when I went to
-count the pounds of freight and create a new column for it using the
-mutate function. By using the distinct function, I was able to have only
-one row for each origin and destination combination, therefore avoiding
-having duplicates with the same amount of freight pounds at the end.
-
 ```{r}
 airport_routes <- freight_coords %>%
   group_by(iata_origin, iata_dest) %>%
@@ -242,14 +219,14 @@ top_20_routes <- airport_routes %>%
 
 ### Plotting the map
 
-To create the map, I used ggplot. I used geom_curve to ensure the lines
+To create the map, I used `ggplot2`. I used `geom_curve` to ensure the lines
 between the airports were curved and not just straight.
 
 ```{r}
 # Define an aviation-themed color palette
-aviation_pal <- c("#1E3A8A", "#3B82F6", "#60A5FA", "#93C5FD",  
-                  "#6366F1", "#EAB308", "#FACC15", "#F97316",  
-                  "#64748B", "#94A3B8", "#CBD5E1", "#E5E7EB")
+aviation_pal <- c("#1E3A8A", "#d2232aff", "#e369a2ff", "#93C5FD",  
+                  "#6366F1", "#f68b21ff", "#FACC15", "#F97316",  
+                  "#64748B", "#94A3B8", "#CBD5E1", "#E5E7EB")  
 
 # Get world map data
 world_map <- map_data("world")
@@ -312,30 +289,9 @@ The data I am using includes information from 2004 all the way to 2024.
 For the basic map made above, I used information from all the years.
 However, where things are coming from and going to has almost certainly
 changed over the past 20 years. This is where I thought using a bump
-chart could ergonicimally show how things have shifted over the past
+chart could effectively show how things have shifted over the past
 several years.
 
-### Refining the data for the bump chart
-
-The main hurdle I faced when doing this chart was deciding how I was
-going to tell the computer to separate the United States from other
-countries. While the map highlights origin and destination differences,
-I didn't want to do that here. The question I wanted this chart to
-answer was purely about what other countries are on either end of the
-arrival or depature with the most pounds of freight.
-
-To do this, I simply told the computer to
-
-I did this using the **ifelse** function. If the country name of the
-origin was equal to the "United States," it tells the computer to use
-the destination country name. If the origin country is not equal to the
-United States, it tells the computer to use the origin name. This is how
-I told the computer to make a new column with the non-united states
-value. Once again, the summarize and sum functions were used to get the
-total amount of freight pounds. Lastly, I used the **group_by** function
-to tie tie the amount of freight to the year it was transported. For
-example, every year would have a row with "china" (or any other
-country), and the amount of freight transported there in the year.
 
 ```{r}
 # Get the amount of freight based on the non us country 
@@ -441,11 +397,6 @@ certain events like the freight recession, became less noticeable.
 Ultimately, I decided it was better and more interesting if the plots
 focused on different years.
 
-### Refining the data for the timeline
-
-The data for the timeline was the easiest to handle because all I really
-needed to do was ensure thaqt the date-time format was correct, then I
-could group and plot with ease.
 
 ```{r}
 # Convert year and month into a proper date format
@@ -475,7 +426,7 @@ timeline <-
   geom_smooth(color = "#1E3A8A", size = 1, span = 0.1, se = FALSE) +
   scale_x_date(date_labels = "%Y", date_breaks = "24 months") +  
   scale_y_continuous(
-    labels = scales::label_number(scale = 1e-3, suffix = "K lb", big.mark = ",")  
+    labels = scales::label_number(scale = 1e-6, suffix = "M lb", big.mark = ",")  
   ) +
   labs(title = "Pounds of Air-Freight Moved To and From The USA",
        x = "",
@@ -483,11 +434,11 @@ timeline <-
   theme_minimal() +
   theme(
     plot.title = element_text(size = 12, face = "bold", hjust = 0.5),  # Match bump chart title
-    axis.text.x = element_text(size = 10, face = "bold", angle = 45, hjust = 1),  
+    axis.text.x = element_text(size = 10, face = "bold"),  
     axis.text.y = element_text(size = 10, face = "bold"),  
     panel.grid.major.y = element_blank(),  
-    panel.grid.minor.y = element_blank(),  
-    panel.grid.major.x = element_line(color = "lightgray", linewidth = 0.5),  
+    panel.grid.minor.y = element_blank(),
+    panel.grid.minor.x = element_blank(),
     plot.margin = margin(20, 50, 20, 50)  # Ensure proper spacing
   ) 
 
@@ -501,5 +452,3 @@ Once all those pieces were finished, I used google slides to put to
 final pieces together.
 
 ![The final product:](final_infograph.png)
-
-And that is how I made the pieces of this infographic

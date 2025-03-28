@@ -2,7 +2,7 @@
 title: "Amanda Overbye"
 about:
   template: solana
-  image: overbye_meds_headshot_2024.jpeg
+  image: friendly_selfie.jpg
   image-shape: rounded
   links: 
     - text: LinkedIn
@@ -18,10 +18,10 @@ editor_options:
   chunk_output_type: console
 ---
 
-Amanda hopes to develop the connection between gathering the data and sharing it through the MEDS program at the Bren School of Environmental Science & Management. She is especially drawn to data processing and visualization. Her research interests are the long-term impacts of climate change and human development on terrestrial mammalian movement and migration. Amanda’s goal is to do responsible scientific research that is accessible and understandable to a broad range of audiences.
+## Hi! I'm Amanda
 
-## Education
+I'm currently pursuing my Master's in Environmental Data Science at the Bren School of Environmental Science & Management at UC Santa Barbara. I love finding ways to make environmental data more meaningful and accessible to everyone.
 
-text
+I aspire to be a data analyst with a special focus on ecology, particularly studying how climate change and human activities affect wildlife movement and migration patterns over time. In addition to research, I'm passionate about teaching and communicating data to diverse audiences—making complex environmental information understandable and useful for everyone.
 
-## Professional Experience
+Feel free to explore my website and learn more about me and my work. Thanks for stopping by!

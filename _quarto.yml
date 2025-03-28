@@ -4,7 +4,10 @@ project:
 
 website:
   title: "Amanda Overbye"
+  favicon: logo_white_clean.png
   navbar:
+    logo: logo_white_clean.png
+    title: False
     left:
       - href: index.qmd
         text: Home
@@ -15,9 +18,7 @@ website:
 
 format:
   html:
-    theme: 
-      light: united
-      dark: superhero
+    theme: styles.scss
     css: styles.css
     toc: false
     page-layout: full

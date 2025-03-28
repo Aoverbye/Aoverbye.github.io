@@ -1,3 +1,30 @@
 /*--scss:defaults --*/
 // font: 
-#@import url();
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+
+// Color palette
+$pale_yellow: #FFFEF2;
+$plum: #E899DC;
+$our_gray: #757083; 
+$our_maroon: #6A041D;
+$seas_green: #4C956C;
+
+
+// Quarto Sass Variables
+$body-bg: $pale_yellow;
+$navbar-bg: $seas_green;
+
+.navbar-brand img { 
+  max-height: 60px;
+  width: auto;
+}
+
+// navbar
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: $seas_green;
+    z-index: 1000; 
+}

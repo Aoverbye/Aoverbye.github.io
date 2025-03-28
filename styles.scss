@@ -18,13 +18,3 @@ $navbar-bg: $seas_green;
   max-height: 60px;
   width: auto;
 }
-
-// navbar
-
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background-color: $seas_green;
-    z-index: 1000; 
-}

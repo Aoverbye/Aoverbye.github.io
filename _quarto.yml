@@ -19,7 +19,7 @@ website:
 format:
   html:
     theme: styles.scss
-    css: styles.scss
+#    css: styles.scss
     toc: false
     page-layout: full
 

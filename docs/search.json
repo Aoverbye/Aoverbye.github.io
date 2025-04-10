@@ -84,6 +84,27 @@
     "text": "Professional Experience"
   },
   {
+    "objectID": "blog_posts.html",
+    "href": "blog_posts.html",
+    "title": "Blog",
+    "section": "",
+    "text": "The Freight That Flies\n\n\n\n\n\n\nAmanda Overbye\n\n\nMar 15, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nThe Great Thomas Fire Analysis: A Tour Of Functions\n\n\n\nPython\n\n\nMEDS\n\n\nGeospatial\n\n\nWildfire\n\n\n\nAnalyzing the Impact Of the Thomas Fire Using a Handful Of Functions\n\n\n\nAmanda G. Overbye\n\n\nDec 4, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Amanda Overbye",
+    "section": "",
+    "text": "I’m currently pursuing my Master’s in Environmental Data Science at the Bren School of Environmental Science & Management at UC Santa Barbara. I love finding ways to make environmental data more meaningful and accessible to everyone.\nI aspire to be a data analyst with a special focus on ecology, particularly studying how climate change and human activities affect wildlife movement and migration patterns over time. In addition to research, I’m passionate about teaching and communicating data to diverse audiences—making complex environmental information understandable and useful for everyone.\nFeel free to explore my website and learn more about me and my work. Thanks for stopping by!"
+  },
+  {
+    "objectID": "index.html#hi-im-amanda",
+    "href": "index.html#hi-im-amanda",
+    "title": "Amanda Overbye",
+    "section": "",
+    "text": "I’m currently pursuing my Master’s in Environmental Data Science at the Bren School of Environmental Science & Management at UC Santa Barbara. I love finding ways to make environmental data more meaningful and accessible to everyone.\nI aspire to be a data analyst with a special focus on ecology, particularly studying how climate change and human activities affect wildlife movement and migration patterns over time. In addition to research, I’m passionate about teaching and communicating data to diverse audiences—making complex environmental information understandable and useful for everyone.\nFeel free to explore my website and learn more about me and my work. Thanks for stopping by!"
+  },
+  {
     "objectID": "blog_posts/2024-10-2024-my-first-post/index.html",
     "href": "blog_posts/2024-10-2024-my-first-post/index.html",
     "title": "blog post title",
@@ -145,26 +166,5 @@
     "title": "Analyzing the Relationship Between Rainfall and West Nile Virus Cases in LA County",
     "section": "",
     "text": "So far, the analysis has shown unexpected results that are inconsistent with the results from prior research, except for the autocorrelation function. I thought lagging the rainfall variable may show results more consistent with the papers.\n1. Lagged Variables\nCreated a lagged rainfall variable to explore delayed effects of precipitation on WNV cases.\n\n\nCode\nwnv_precip &lt;- wnv_precip %&gt;% \n  mutate(lag_prcp_4weeks = lag(avg_weekly_prcp, 4))\n\n\n2. Correlation Analysis\nExamined the correlation between rainfall 4 weeks prior and WNV cases.\n\n\nCode\ncorrelation &lt;- cor(wnv_precip$lag_prcp_4weeks, wnv_precip$reported_positive_cases, use = \"complete.obs\")\nprint(paste(\"Correlation between rainfall 4 weeks ago and WNV cases:\", correlation))\n\n\n[1] \"Correlation between rainfall 4 weeks ago and WNV cases: -0.0669666699724962\"\n\n\n3. Regression Analysis\nFitted a linear model to quantify the relationship between lagged rainfall and WNV cases.\n\n\nCode\nmodel &lt;- lm(reported_positive_cases ~ lag_prcp_4weeks, data = wnv_precip)\nsummary(model)\n\n\n\nCall:\nlm(formula = reported_positive_cases ~ lag_prcp_4weeks, data = wnv_precip)\n\nResiduals:\n   Min     1Q Median     3Q    Max \n-2.460 -2.460 -2.436 -1.199 37.540 \n\nCoefficients:\n                Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)       2.4597     0.2579   9.536   &lt;2e-16 ***\nlag_prcp_4weeks  -2.0339     1.3005  -1.564    0.118    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 5.773 on 543 degrees of freedom\n  (39 observations deleted due to missingness)\nMultiple R-squared:  0.004485,  Adjusted R-squared:  0.002651 \nF-statistic: 2.446 on 1 and 543 DF,  p-value: 0.1184\n\n\nIn a very generous sense, using the lagged variable did show results that were slightly more like those in the research paper. However, the results are still completely different. With the lagged variable, the p-value is still not significant (p = 0.1184). The coefficient for the intercept did go up slightly, with the difference being 0.0484. Our lag_prcp_4weeks coefficient being -2.0339 means that for every inch of rain in the past 4 weeks, there would be -2.03 WNV cases. Lastly, we can see only about 0.45% of the variability in reported WNV cases can be explained by lagged precipitation.\n4. Visualization of Regression\nVisualized the relationship between lagged rainfall and WNV cases.\n\n\nCode\nggplot(wnv_precip, aes(x = lag_prcp_4weeks, y = reported_positive_cases)) +\n  geom_point() +\n  geom_smooth(method = \"glm\", color = \"navy\", se = FALSE) +\n  labs(\n    title = \"Relationship Between Rainfall (4 Weeks Ago) and WNV Cases\",\n    x = \"Average Weekly Rainfall (4 Weeks Ago)\",\n    y = \"Reported Positive WNV Cases\"\n  ) +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\nContrary to initial expectations, the data failed to demonstrate a statistically significant relationship between rainfall and West Nile Virus cases. The negative correlation and elevated p-values suggest that precipitation alone may not be a reliable predictor of virus transmission in Los Angeles County. In this analysis, I have failed to reject the null hypothesis.\nThere are several reasons that could account for these surprising results.\n\nSmall sample size I was only looking at cases in LA County, both of the studies I referenced earlier had much larger samples to analyze.\nLack of precipitation LA County is a notoriously sunny area, it tends to get very little precipitation year round.\nThere is an omitted variable bias. A stronger correlation to temperature Again, referencing back to the studies mentioned earlier, both showed more of a relationship between temperature and the number of reported cases than precipitation. My analysis omitted these variables because the Arcadia data set I used only had data about precipitation.\n\nReferences\nCalifornia Department of Public Health (CDPH). (2017, April 28). CDPH confirms first human West Nile virus illness of 2017 (No. 17-043). California Department of Public Health. https://www.cdph.ca.gov/Programs/OPA/Pages/NR17-043.aspx\nCenters for Disease Control and Prevention. (2024, May 15). About West Nile virus. Centers for Disease Control and Prevention. https://www.cdc.gov/west-nile-virus/about/index.html\nLos Angeles County Department of Public Health (LACDPH). (2018, May 1). West Nile virus and other arboviral diseases: 2017 Los Angeles County Epidemiology Final Report. Los Angeles County Department of Public Health. https://publichealth.lacounty.gov/acd/docs/Arbo2017.pdf\nShand, L., Brown, W. M., Chaves, L. F., Goldberg, T. L., Hamer, G. L., Haramis, L., Kitron, U., Walker, E. D., & Ruiz, M. O. (2016). Predicting West Nile virus infection risk from the synergistic effects of rainfall and temperature. Journal of Medical Entomology, 53(4), 1–10. https://doi.org/10.1093/jme/tjw042\nSoverow, J. E., Wellenius, G. A., Fisman, D. N., & Mittleman, M. A. (2009). Infectious disease in a warming world: How weather influenced West Nile Virus in the United States (2001–2005). Environmental Health Perspectives, 117(7), 1049–1052. https://doi.org/10.1289/ehp.0800487"
-  },
-  {
-    "objectID": "blog_posts.html",
-    "href": "blog_posts.html",
-    "title": "Blog",
-    "section": "",
-    "text": "The Freight That Flies\n\n\n\n\n\n\nAmanda Overbye\n\n\nMar 15, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nAnalyzing the Relationship Between Rainfall and West Nile Virus Cases in LA County\n\n\n\n\n\n\nAmanda Overbye\n\n\nDec 13, 2024\n\n\n\n\n\n\n\n\n\n\n\n\nThe Great Thomas Fire Analysis: A Tour Of Functions\n\n\n\nPython\n\n\nMEDS\n\n\nGeospatial\n\n\nWildfire\n\n\n\nAnalyzing the Impact Of the Thomas Fire Using a Handful Of Functions\n\n\n\nAmanda G. Overbye\n\n\nDec 4, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nblog post title\n\n\n\nQuarto\n\n\nMEDS\n\n\ntest-post\n\n\n\nA short catchy description of a blog post\n\n\n\nAmanda Overbye\n\n\nOct 18, 2024\n\n\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Amanda Overbye",
-    "section": "",
-    "text": "I’m currently pursuing my Master’s in Environmental Data Science at the Bren School of Environmental Science & Management at UC Santa Barbara. I love finding ways to make environmental data more meaningful and accessible to everyone.\nI aspire to be a data analyst with a special focus on ecology, particularly studying how climate change and human activities affect wildlife movement and migration patterns over time. In addition to research, I’m passionate about teaching and communicating data to diverse audiences—making complex environmental information understandable and useful for everyone.\nFeel free to explore my website and learn more about me and my work. Thanks for stopping by!"
-  },
-  {
-    "objectID": "index.html#hi-im-amanda",
-    "href": "index.html#hi-im-amanda",
-    "title": "Amanda Overbye",
-    "section": "",
-    "text": "I’m currently pursuing my Master’s in Environmental Data Science at the Bren School of Environmental Science & Management at UC Santa Barbara. I love finding ways to make environmental data more meaningful and accessible to everyone.\nI aspire to be a data analyst with a special focus on ecology, particularly studying how climate change and human activities affect wildlife movement and migration patterns over time. In addition to research, I’m passionate about teaching and communicating data to diverse audiences—making complex environmental information understandable and useful for everyone.\nFeel free to explore my website and learn more about me and my work. Thanks for stopping by!"
   }
 ]

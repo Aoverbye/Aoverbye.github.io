@@ -15,7 +15,7 @@ csl: plos-computational-biology.csl
 image: pronghorn1.jpg
 citation:
     url: https://en.wikipedia.org/wiki/Pronghorn
-draft: false
+draft: true
 draft-mode: visible 
 ---
 

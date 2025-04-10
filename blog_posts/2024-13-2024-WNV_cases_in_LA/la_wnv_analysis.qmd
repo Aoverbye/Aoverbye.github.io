@@ -11,6 +11,7 @@ format:
     toc: true
 editor_options: 
   chunk_output_type: console
+draft: true
 ---
 
 # Analyzing the Relationship Between Rainfall and West Nile Virus Cases in LA County

@@ -2,11 +2,9 @@
   {
     "listing": "/blog_posts.html",
     "items": [
-      "/blog_posts/2025-4-21-biodiversity-phoenix/biodiversity_phoenix_blog.html",
-      "/blog_posts/2024-13-2024-WNV_cases_in_LA/la_wnv_analysis.html",
+      "/blog_posts/2025-4-21-biodiversity-phoenix/biodiversity_phoenix-blog.html",
       "/blog_posts/2025-3-14-air-freight-viz/air_freight_post.html",
-      "/blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog_edit.html",
-      "/blog_posts/2024-10-2024-my-first-post/index.html"
+      "/blog_posts/2024-12-2-thomas-fire-post/thomas_fire_blog_edit.html"
     ]
   }
 ]

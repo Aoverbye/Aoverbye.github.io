@@ -4,7 +4,7 @@ title: "About"
 
 ## Education
 
-#### Master of Environmental Data Science (Expected June 2025)
+#### Master of Environmental Data Science (June 2025)
 
 Bren School of Environmental Science & Management
 
@@ -12,9 +12,6 @@ University of California, Santa Barbara
 
 #### Bachelor of Science in Environmental Science (May 2022)
 
-College of Sciences and Mathematics 
+College of Sciences and Mathematics
 
 Belmont University, Nashville, TN
-
-
-

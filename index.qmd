@@ -20,7 +20,7 @@ editor_options:
 
 ## Hi! I'm Amanda
 
-I'm currently pursuing my Master's in Environmental Data Science at the Bren School of Environmental Science & Management at UC Santa Barbara. I love finding ways to make environmental data more meaningful and accessible to everyone.
+I recently graduated with my Master's in Environmental Data Science from the Bren School of Environmental Science & Management at UC Santa Barbara. I love finding ways to make environmental data more meaningful and accessible to everyone.
 
 I aspire to be a data analyst with a special focus on ecology, particularly studying how climate change and human activities affect wildlife movement and migration patterns over time. In addition to research, I'm passionate about teaching and communicating data to diverse audiences—making complex environmental information understandable and useful for everyone.
 
